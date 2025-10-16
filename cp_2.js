@@ -46,8 +46,8 @@ function handleError(err) {
 }
 
 // Test function output
-fetchProductsThen();
-fetchProductsAsync();
+fetchProductsThen();    //Logs the data to the console
+fetchProductsAsync();   //Returns a promise with the product data, no console output
 
 // Display products on the page
 fetchProductsAsync().then(products => displayProducts(products));
