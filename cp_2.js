@@ -26,7 +26,7 @@ function displayProducts(products) {
 
     products.forEach(product => {
         const fields = product.fields || {};
-        const name = fields.name;
+        const name = fields.name.toUpperCase();
         const price = fields.price !== undefined ? (fields.price / 100).toFixed(2) : "0.00";
         const imageURL = fields.image?.[0]?.url;
 
