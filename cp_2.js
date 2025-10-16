@@ -2,16 +2,20 @@ function fetchProductsThen() {
     fetch('https://www.course-api.com/javascript-store-products')
         .then(response => response.json())  //Parses the raw response data into JSON
         .then(data => console.log(data))    //Logs the data to the console
-        .catch(err => console.error("Error fetching products: ", err.message)); //Logs any errors
+        .catch(err => handleError(err)); //Logs any errors
 }
 
 async function fetchProductsAsync() {
     try {
         const response = await fetch('https://www.course-api.com/javascript-store-products');
+        // Check for network errors first
+        if (!response.ok) {     
+            throw new Error('Network response was not ok');
+        }
         const data = await response.json();
         return data;
     } catch (err) {
-        console.error("Error fetching products: ", err.message);
+        handleError(err);
         return [];  //Returns an empty array to prevent undefined argument errors
     }
 }
@@ -37,8 +41,8 @@ function displayProducts(products) {
     })
 }
 
-function getImageURL(product) {
-    return product.image[0].url;
+function handleError(err) {
+    console.error("Error fetching products: ", err.message);
 }
 
 // Test function output
